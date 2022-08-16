@@ -129,41 +129,42 @@ namespace Manage.Controllers
                     if (carStore != null)
                     {
 
-                        var cars = _carRepository.GetAll();
-                        if (cars.Count > 0)
+                        var sellers = _sellerRepository.GetAll();
+                        if (sellers.Count > 0)
                         {
                         Id: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please choose the id");
-                            foreach (var car in cars)
+                            foreach (var seller in sellers)
                             {
-                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"id : {car.Id}, name: {car.Name}," +
-                        $" price : {car.Price}, amount: {car.Amount}, color : {car.Color}, carstore : {car.CarStore}");
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"id: {seller.Id}" +
+                                       $"name : {seller.Name}, surname: {seller.Surname}, experience " +
+                                       $": {seller.Experience}," +
+                                       $" age: {seller.Age}, car store: {seller.CarStore}");
+                                carStore.Sellers.Add(seller);
                             }
                             id = Console.ReadLine();
                             result = int.TryParse(id, out Id);
                             if (result)
                             {
-                                var car = _carRepository.Get(c => c.Id == Id);
-                                if (car != null)
+                                var seller = _sellerRepository.Get(s => s.Id == Id);
+                                if (seller != null)
                                 {
-
-
-                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please enter the new name of car");
+                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please enter the new name of seller");
                                     string name = Console.ReadLine();
-                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please enter the new color of car");
-                                    string color = Console.ReadLine();
-                                Price: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please enter the  new price of car ");
-                                    string price = Console.ReadLine();
-                                    double Price;
-                                    result = double.TryParse(price, out Price);
+                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please enter the new surname of seller");
+                                    string surname = Console.ReadLine();
+                                Age: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please enter the  new age of seller ");
+                                    string age = Console.ReadLine();
+                                    byte Age;
+                                    result = byte.TryParse(age, out Age);
                                     if (result)
                                     {
-                                    Amount: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please enter the new amount ");
-                                        string amount = Console.ReadLine();
-                                        int Amount;
-                                        result = int.TryParse(amount, out Amount);
+                                    exp: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please enter the new amount ");
+                                        string exp = Console.ReadLine();
+                                        byte Exp;
+                                        result = byte.TryParse(exp, out Exp);
                                         if (result)
                                         {
-                                        option: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, "Please enter 1 to keep the car in the same car store or" +
+                                        option: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, "Please enter 1 to keep the seller in the same car store or" +
                                             " 2 if you want to change the carstore ");
                                             string option = Console.ReadLine();
                                             byte op;
@@ -174,14 +175,14 @@ namespace Manage.Controllers
                                                 {
                                                     case 1:
 
-                                                        car.Price = Price;
-                                                        car.Amount = Amount;
-                                                        car.Name = name;
-                                                        car.Color = color;
-                                                        car.CarStore = carStore;
-                                                        _carRepository.Update(car);
-                                                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"successfully update. Name: {car.Name}," +
-                                                            $" price : {car.Price}, amount : {car.Amount}, color : {car.Color} , carstore: {car.CarStore}");
+                                                        seller.Surname = surname;
+                                                        seller.Name = name;
+                                                        seller.Age = Age;
+                                                        seller.Experience = Exp;
+                                                        seller.CarStore = carStore;
+                                                        _sellerRepository.Update(seller);
+                                                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"successfully updated. Name: {seller.Name}," +
+                                                            $" surname : {seller.Surname}, age : {seller.Age}, experience : {seller.Experience} , carstore: {seller.CarStore}");
 
                                                         break;
                                                     case 2:
@@ -203,15 +204,16 @@ namespace Manage.Controllers
                                                                 var choosenCarStore = _carStoreRepository.Get(cs => cs.Id == Id);
                                                                 if (choosenCarStore != null)
                                                                 {
-                                                                    car.Price = Price;
-                                                                    car.Amount = Amount;
-                                                                    car.Name = name;
-                                                                    car.Color = color;
-                                                                    car.CarStore = choosenCarStore;
-                                                                    _carRepository.Update(car);
-                                                                    choosenCarStore.Cars.Add(car);
-                                                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"successfully updated the id: {car.Id}" +
-                                    $"name : {car.Name}, price: {car.Price}, amount : {car.Amount}, car store: {car.CarStore}");
+                                                                    seller.Surname = surname;
+                                                                    seller.Name = name;
+                                                                    seller.Age = Age;
+                                                                    seller.Experience = Exp;
+                                                                    seller.CarStore = choosenCarStore;
+                                                                    _sellerRepository.Update(seller);
+                                                                    choosenCarStore.Sellers.Add(seller);
+                                                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"successfully updated. Name: {seller.Name}," +
+                                                           $" surname : {seller.Surname}, age : {seller.Age}, experience : {seller.Experience} , carstore: {seller.CarStore}");
+
                                                                 }
                                                                 else
                                                                 {
@@ -241,16 +243,16 @@ namespace Manage.Controllers
                                         }
                                         else
                                         {
-                                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please enter the amount in the correct format ");
-                                            goto Amount;
+                                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please enter the experience in the correct format ");
+                                            goto exp;
                                         }
 
 
                                     }
                                     else
                                     {
-                                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please enter the price in the correct format ");
-                                        goto Price;
+                                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please enter the age in the correct format ");
+                                        goto Age;
                                     }
 
                                 }
