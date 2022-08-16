@@ -139,7 +139,7 @@ namespace Manage.Controllers
                                        $"name : {seller.Name}, surname: {seller.Surname}, experience " +
                                        $": {seller.Experience}," +
                                        $" age: {seller.Age}, car store: {seller.CarStore}");
-                                carStore.Sellers.Add(seller);
+                                
                             }
                             id = Console.ReadLine();
                             result = int.TryParse(id, out Id);
@@ -272,7 +272,7 @@ namespace Manage.Controllers
                         }
                         else
                         {
-                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no owner found");
+                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no seller found");
                         }
                     }
                     else
@@ -325,7 +325,7 @@ namespace Manage.Controllers
                                        $"name : {seller.Name}, surname: {seller.Surname}, experience " +
                                        $": {seller.Experience}," +
                                        $" age: {seller.Age}, car store: {seller.CarStore}");
-                                carStore.Sellers.Add(seller);
+                                
                             }
                             id = Console.ReadLine();
                             result = int.TryParse(id, out Id);
@@ -374,8 +374,8 @@ namespace Manage.Controllers
             }
         }
         #endregion
-        #region GetAllCarsByCarStore
-        public void GetAllCarsByCarStore()
+        #region GetAllSellersByCarStore
+        public void GetAllSellersByCarStore()
         {
             var carStores = _carStoreRepository.GetAll();
             if (carStores.Count > 0)
@@ -395,21 +395,22 @@ namespace Manage.Controllers
                     if (carStore != null)
                     {
 
-                        var cars = _carRepository.GetAll();
-                        if (cars.Count > 0)
+                        var sellers = _sellerRepository.GetAll(s=>s.CarStore.Id==carStore.Id);
+                        if (sellers.Count > 0)
                         {
-
-                            foreach (var car in cars)
+                       
+                            foreach (var seller in sellers)
                             {
-                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"id : {car.Id}, name: {car.Name}," +
-                        $" price : {car.Price}, amount: {car.Amount}, color : {car.Color}, carstore : {car.CarStore}");
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"id: {seller.Id}" +
+                                       $"name : {seller.Name}, surname: {seller.Surname}, experience " +
+                                       $": {seller.Experience}," +
+                                       $" age: {seller.Age}, car store: {seller.CarStore}");
                             }
-
-
+                           
                         }
                         else
                         {
-                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no owner found");
+                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no seller found");
                         }
                     }
                     else
