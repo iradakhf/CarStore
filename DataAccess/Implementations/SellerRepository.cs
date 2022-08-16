@@ -89,7 +89,9 @@ namespace DataAccess.Implementations
                     seller.Name = entity.Name;
                     seller.Age = entity.Age;
                     seller.Surname = entity.Surname;
+                    seller.Experience = entity.Experience;
                     seller.CarStore = entity.CarStore;
+                   
                 }
             }
             catch (Exception)

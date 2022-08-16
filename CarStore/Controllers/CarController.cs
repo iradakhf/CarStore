@@ -368,6 +368,7 @@ namespace Manage.Controllers
             }
         }
         #endregion
+        #region GetAllCarsByCarStore
         public void GetAllCarsByCarStore()
         {
             var carStores = _carStoreRepository.GetAll();
@@ -422,6 +423,7 @@ namespace Manage.Controllers
                 ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no car store found");
             }
         }
+        #endregion
         #region GetAll
         public void GetAll()
         {
