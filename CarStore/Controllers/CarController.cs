@@ -112,7 +112,7 @@ namespace Manage.Controllers
             var carStores = _carStoreRepository.GetAll();
             if (carStores.Count > 0)
             {
-            ID: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please choose the id of one car store to create car in");
+            ID: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please choose the id of one car store ");
                 foreach (var carstore in carStores)
                 {
                     ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"id : {carstore.Id}, name: {carstore.Name}," +
@@ -296,7 +296,7 @@ namespace Manage.Controllers
             var carStores = _carStoreRepository.GetAll();
             if (carStores.Count > 0)
             {
-            ID: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please choose the id of one car store to create car in");
+            ID: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please choose the id of one car store ");
                 foreach (var carstore in carStores)
                 {
                     ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"id : {carstore.Id}, name: {carstore.Name}," +
@@ -367,9 +367,59 @@ namespace Manage.Controllers
             }
         }
         #endregion
-        public void GetCarByCarStore()
+        public void GetAllCarsByCarStore()
         {
+            var carStores = _carStoreRepository.GetAll();
+            if (carStores.Count > 0)
+            {
+            ID: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please choose the id of one car store ");
+                foreach (var carstore in carStores)
+                {
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"id : {carstore.Id}, name: {carstore.Name}," +
+                        $" address : {carstore.Address}, phonenumber: {carstore.PhoneNumber}, owner : {carstore.Owner}");
+                }
+                string id = Console.ReadLine();
+                int Id;
+                bool result = int.TryParse(id, out Id);
+                if (result)
+                {
+                    var carStore = _carStoreRepository.Get(cs => cs.Id == Id);
+                    if (carStore != null)
+                    {
 
+                        var cars = _carRepository.GetAll();
+                        if (cars.Count > 0)
+                        {
+                       
+                            foreach (var car in cars)
+                            {
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"id : {car.Id}, name: {car.Name}," +
+                        $" price : {car.Price}, amount: {car.Amount}, color : {car.Color}, carstore : {car.CarStore}");
+                            }
+                            
+
+                        }
+                        else
+                        {
+                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no owner found");
+                        }
+                    }
+                    else
+                    {
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no car store found with this id ");
+
+                    }
+                }
+                else
+                {
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "enter id in correct format");
+                    goto ID;
+                }
+            }
+            else
+            {
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no car store found");
+            }
         }
         #region GetAll
         public void GetAll()
@@ -377,7 +427,7 @@ namespace Manage.Controllers
             var carStores = _carStoreRepository.GetAll();
             if (carStores.Count > 0)
             {
-            ID: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please choose the id of one car store to create car in");
+            ID: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please choose the id of one car store");
                 foreach (var carstore in carStores)
                 {
                     ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"id : {carstore.Id}, name: {carstore.Name}," +
