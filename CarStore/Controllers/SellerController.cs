@@ -1,12 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+
+using DataAccess.Implementations;
 
 namespace Manage.Controllers
 {
-    internal class SellerController
+    public class SellerController
     {
+        public SellerRepository _sellerRepository;
+        public SellerController()
+        {
+            _sellerRepository = new SellerRepository();
+        }
+        public void Create()
+        {
+
+        }
+        public void Update()
+        {
+
+        }
+        public void Delete()
+        {
+
+        }
+        public void GetSellerByCarStore()
+        {
+
+        }
+        public void GetAll()
+        {
+
+        }
     }
 }

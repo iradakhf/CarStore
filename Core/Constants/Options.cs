@@ -6,7 +6,44 @@ using System.Threading.Tasks;
 
 namespace Core.Constants
 {
-    internal class Constants
+    enum Option1
     {
+        Exit,
+        Create,
+        Update,
+        Delete,
+        Get,
+        GetAll
+
+    }
+    enum Option2
+    {
+        Exit,
+        Create,
+        Update,
+        Delete,
+        Get,
+        GetAll
+
+    }
+    enum Option3
+    {
+        Exit,
+        Create,
+        Update,
+        Delete,
+        Get,
+        GetAll
+
+    }
+    enum Option4
+    {
+        Exit,
+        Create,
+        Update,
+        Delete,
+        Get,
+        GetAll
+
     }
 }

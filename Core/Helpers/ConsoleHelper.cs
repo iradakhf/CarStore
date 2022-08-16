@@ -3,7 +3,7 @@ namespace Core.Helpers
 {
     public class ConsoleHelper
     {
-        public void WriteTextWithColor(ConsoleColor color,string text)
+        public static void WriteTextWithColor(ConsoleColor color,string text)
         {
             Console.ForegroundColor = color;
             Console.WriteLine(text);

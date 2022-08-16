@@ -11,5 +11,9 @@ namespace Core
         public override string Surname { get ; set ; }
         public override byte Age { get ; set; }
         public List<CarStore> CarStores { get; set; }
+        public Owner()
+        {
+            CarStores = new List<CarStore>();
+        }
     }
 }

@@ -5,11 +5,11 @@ namespace DataAccess
 {
     public class DataContext
     {
-        public List<Car> Cars { get; set; }
-        public List<CarStore> CarStores { get; set; }
-        public List<Seller> Sellers { get; set; }
-        public List<Admin> Admins { get; set; }
-        public List<Owner> Owners { get; set; }
+        public static List<Car> Cars { get; set; }
+        public static List<CarStore> CarStores { get; set; }
+        public static List<Seller> Sellers { get; set; }
+        public static List<Admin> Admins { get; set; }
+        public static List<Owner> Owners { get; set; }
         public DataContext()
         {
             Cars = new List<Car>();

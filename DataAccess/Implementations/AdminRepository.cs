@@ -11,28 +11,69 @@ namespace DataAccess.Implementations
 {
     public class AdminRepository : IRepository<Admin>
     {
-        public void Create()
+        public Admin Create(Admin entity)
         {
-            
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-        public void Get()
+        public void Delete(Admin entity)
         {
-           
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-        public void GetAll()
+        public Admin Get(Predicate<Admin> filter)
         {
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-        public void Update()
+        public List<Admin> GetAll(Predicate<Admin> filter)
         {
-           
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-       public void Delete()
+        public void Update(Admin entity)
         {
+            try
+            {
 
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

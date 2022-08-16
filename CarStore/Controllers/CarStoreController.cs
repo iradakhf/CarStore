@@ -1,12 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+
+using DataAccess.Implementations;
 
 namespace Manage.Controllers
 {
-    internal class CarStoreController
+    public class CarStoreController
     {
+        public CarStoreRepository _carStoreRepository;
+        public CarStoreController()
+        {
+            _carStoreRepository = new CarStoreRepository();
+        }
+        public void Create()
+        {
+
+        }
+        public void Update()
+        {
+
+        }
+        public void Delete()
+        {
+
+        }
+        public void GetCarStoreByOwner()
+        {
+
+        }
+        public void GetAll()
+        {
+
+        }
     }
 }
