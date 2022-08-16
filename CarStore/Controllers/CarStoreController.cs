@@ -245,7 +245,82 @@ namespace Manage.Controllers
         #endregion
         public void Delete()
         {
+            var owners = _ownerRepository.GetAll();
+            if (owners.Count > 0)
+            {
+            ID: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please choose the id of one owner ");
+                foreach (var owner in owners)
+                {
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"id : {owner.Id}, name: {owner.Name}, " +
+                        $"surname : {owner.Surname}" +
+                        $" age : {owner.Age}");
+                }
+                string id = Console.ReadLine();
+                int Id;
+                bool result = int.TryParse(id, out Id);
+                if (result)
+                {
+                    var owner = _ownerRepository.Get(o => o.Id == Id);
+                    if (owner != null)
+                    {
 
+                        var carStores = _carStoreRepository.GetAll();
+                        if (carStores.Count > 0)
+                        {
+                        Id: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please choose the id");
+                            foreach (var carStore in carStores)
+                            {
+
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $" id: {carStore.Id}" +
+                                    $"name : {carStore.Name}, address: {carStore.Address}, phone number : {carStore.PhoneNumber}, " +
+                                    $"owner: {carStore.Owner}");
+                            }
+                            id = Console.ReadLine();
+                            result = int.TryParse(id, out Id);
+                            if (result)
+                            {
+                                var carStore = _carStoreRepository.Get(cs => cs.Id == Id);
+                                if (carStore != null)
+                                {
+                                    _carStoreRepository.Delete(carStore);
+                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, "successfully deleted");
+
+                                }
+                                else
+                                {
+                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "nothing found with this ");
+
+                                }
+
+                            }
+                            else
+                            {
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please enter the id in the correct format ");
+                                goto Id;
+                            }
+
+                        }
+                        else
+                        {
+                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no owner found");
+                        }
+                    }
+                    else
+                    {
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no car store found with this id ");
+
+                    }
+                }
+                else
+                {
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "enter id in correct format");
+                    goto ID;
+                }
+            }
+            else
+            {
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no car store found");
+            }
         }
         public void GetCarStoresByOwner()
         {
@@ -253,7 +328,58 @@ namespace Manage.Controllers
         }
         public void GetAll()
         {
+            var owners = _ownerRepository.GetAll();
+            if (owners.Count > 0)
+            {
+            ID: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please choose the id of one owner ");
+                foreach (var owner in owners)
+                {
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"id : {owner.Id}, name: {owner.Name}, " +
+                        $"surname : {owner.Surname}" +
+                        $" age : {owner.Age}");
+                }
+                string id = Console.ReadLine();
+                int Id;
+                bool result = int.TryParse(id, out Id);
+                if (result)
+                {
+                    var owner = _ownerRepository.Get(o => o.Id == Id);
+                    if (owner != null)
+                    {
 
+                        var carStores = _carStoreRepository.GetAll();
+                        if (carStores.Count > 0)
+                        {
+                           foreach (var carStore in carStores)
+                            {
+
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $" id: {carStore.Id}" +
+                                    $"name : {carStore.Name}, address: {carStore.Address}, phone number : {carStore.PhoneNumber}, " +
+                                    $"owner: {carStore.Owner}");
+                            }
+                           
+                        }
+                        else
+                        {
+                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no owner found");
+                        }
+                    }
+                    else
+                    {
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no car store found with this id ");
+
+                    }
+                }
+                else
+                {
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "enter id in correct format");
+                    goto ID;
+                }
+            }
+            else
+            {
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no car store found");
+            }
         }
     }
 }

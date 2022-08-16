@@ -60,11 +60,12 @@ namespace Manage.Controllers
 
                                 };
                                 var createdCar = _carRepository.Create(car);
+
                                 if (createdCar != null)
                                 {
                                     ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"successfully created with the id: {createdCar.Id}" +
                                         $"name : {createdCar.Name}, price: {createdCar.Price}, amount : {createdCar.Amount}, car store: {createdCar.CarStore}");
-
+                                    carStore.Cars.Add(car);
                                 }
                                 else
                                 {
