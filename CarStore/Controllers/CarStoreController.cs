@@ -66,7 +66,7 @@ namespace Manage.Controllers
                     }
                     else
                     {
-                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no car store found with this id ");
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no owner found with this id ");
 
                     }
                 }
@@ -79,7 +79,7 @@ namespace Manage.Controllers
             }
             else
             {
-                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no car store found");
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no owner found");
             }
 
         }
@@ -193,7 +193,7 @@ namespace Manage.Controllers
                                                 }
                                                 else
                                                 {
-                                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no car store found");
+                                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no owner found");
                                                 }
                                                 break;
                                         }
@@ -221,12 +221,12 @@ namespace Manage.Controllers
                         }
                         else
                         {
-                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no owner found");
+                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no car store found");
                         }
                     }
                     else
                     {
-                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no car store found with this id ");
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no car store owner found with this id ");
 
                     }
                 }
@@ -238,7 +238,7 @@ namespace Manage.Controllers
             }
             else
             {
-                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no car store found");
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no car store owner found");
             }
         }
 
@@ -307,7 +307,7 @@ namespace Manage.Controllers
                     }
                     else
                     {
-                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no car store found with this id ");
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no car store owner found with this id ");
 
                     }
                 }
@@ -319,15 +319,12 @@ namespace Manage.Controllers
             }
             else
             {
-                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no car store found");
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no car store owner found");
             }
         }
         public void GetCarStoresByOwner()
         {
 
-        }
-        public void GetAll()
-        {
             var owners = _ownerRepository.GetAll();
             if (owners.Count > 0)
             {
@@ -347,21 +344,21 @@ namespace Manage.Controllers
                     if (owner != null)
                     {
 
-                        var carStores = _carStoreRepository.GetAll();
+                        var carStores = _carStoreRepository.GetAll(cs => cs.Owner.Id == owner.Id);
                         if (carStores.Count > 0)
                         {
-                           foreach (var carStore in carStores)
+                            foreach (var carStore in carStores)
                             {
 
                                 ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $" id: {carStore.Id}" +
                                     $"name : {carStore.Name}, address: {carStore.Address}, phone number : {carStore.PhoneNumber}, " +
                                     $"owner: {carStore.Owner}");
                             }
-                           
+
                         }
                         else
                         {
-                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no owner found");
+                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no car store found");
                         }
                     }
                     else
@@ -380,6 +377,29 @@ namespace Manage.Controllers
             {
                 ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no car store found");
             }
+
         }
+        public void GetAll()
+        {
+
+
+            var carStores = _carStoreRepository.GetAll();
+            if (carStores.Count > 0)
+            {
+                foreach (var carStore in carStores)
+                {
+
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $" id: {carStore.Id}" +
+                        $"name : {carStore.Name}, address: {carStore.Address}, phone number : {carStore.PhoneNumber}, " +
+                        $"owner: {carStore.Owner}");
+                }
+
+            }
+            else
+            {
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no car store found");
+            }
+        }
+
     }
 }
