@@ -23,12 +23,16 @@ namespace DataAccess.Implementations
 
         public void GetAll()
         {
-            throw new NotImplementedException();
         }
 
         public void Update()
         {
-            throw new NotImplementedException();
+           
+        }
+
+       public void Delete()
+        {
+
         }
     }
 }

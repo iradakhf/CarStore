@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+
+using Core.Abstracts;
 
 namespace Core
 {
-    internal class Owner
+    public class Owner : Person, IEntity
     {
+        public int Id { get ; set; }
+        public override string Name { get; set ; }
+        public override string Surname { get ; set ; }
+        public override byte Age { get ; set; }
+        public List<CarStore> CarStores { get; set; }
     }
 }

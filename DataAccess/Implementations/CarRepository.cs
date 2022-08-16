@@ -6,9 +6,7 @@ namespace DataAccess.Implementations
     public class CarRepository : IRepository<Car>
 
     {
-       
-
-        public void Create()
+        public void Create( Car car)
         {
             try
             {
@@ -19,6 +17,11 @@ namespace DataAccess.Implementations
 
                 Console.WriteLine(m); ;
             }
+        }
+
+        public void Delete()
+        {
+            
         }
 
         public void Get()

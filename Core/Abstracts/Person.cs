@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Core.Abstracts
 {
-    internal class Person
+    public abstract class Person
     {
+        public abstract string Name { get; set; }
+        public abstract string Surname { get; set; }
+        public abstract byte Age { get; set; }
     }
 }
