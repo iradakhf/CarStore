@@ -50,7 +50,7 @@ namespace Manage.Controllers
                             string exp = Console.ReadLine();
                             byte Exp;
                             result = byte.TryParse(exp, out Exp);
-                            if (result && Exp<Age)
+                            if (result && Exp < Age)
                             {
 
                                 Seller seller = new Seller
@@ -60,7 +60,7 @@ namespace Manage.Controllers
                                     Name = name,
                                     Experience = Exp,
                                     CarStore = carStore
-                                    
+
                                 };
                                 var createdSeller = _sellerRepository.Create(seller);
 
@@ -139,7 +139,7 @@ namespace Manage.Controllers
                                        $"name : {seller.Name}, surname: {seller.Surname}, experience " +
                                        $": {seller.Experience}," +
                                        $" age: {seller.Age}, car store: {seller.CarStore}");
-                                
+
                             }
                             id = Console.ReadLine();
                             result = int.TryParse(id, out Id);
@@ -325,7 +325,7 @@ namespace Manage.Controllers
                                        $"name : {seller.Name}, surname: {seller.Surname}, experience " +
                                        $": {seller.Experience}," +
                                        $" age: {seller.Age}, car store: {seller.CarStore}");
-                                
+
                             }
                             id = Console.ReadLine();
                             result = int.TryParse(id, out Id);
@@ -395,10 +395,10 @@ namespace Manage.Controllers
                     if (carStore != null)
                     {
 
-                        var sellers = _sellerRepository.GetAll(s=>s.CarStore.Id==carStore.Id);
+                        var sellers = _sellerRepository.GetAll(s => s.CarStore.Id == carStore.Id);
                         if (sellers.Count > 0)
                         {
-                       
+
                             foreach (var seller in sellers)
                             {
                                 ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"id: {seller.Id}" +
@@ -406,7 +406,7 @@ namespace Manage.Controllers
                                        $": {seller.Experience}," +
                                        $" age: {seller.Age}, car store: {seller.CarStore}");
                             }
-                           
+
                         }
                         else
                         {
@@ -434,54 +434,24 @@ namespace Manage.Controllers
         #region GetAll
         public void GetAll()
         {
-            var carStores = _carStoreRepository.GetAll();
-            if (carStores.Count > 0)
+            var sellers = _sellerRepository.GetAll();
+            if (sellers.Count > 0)
             {
-            ID: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please choose the id of one car store");
-                foreach (var carstore in carStores)
-                {
-                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"id : {carstore.Id}, name: {carstore.Name}," +
-                        $" address : {carstore.Address}, phonenumber: {carstore.PhoneNumber}, owner : {carstore.Owner}");
-                }
-                string id = Console.ReadLine();
-                int Id;
-                bool result = int.TryParse(id, out Id);
-                if (result)
-                {
-                    var carStore = _carStoreRepository.Get(cs => cs.Id == Id);
-                    if (carStore != null)
-                    {
 
-                        var cars = _carRepository.GetAll();
-                        if (cars.Count > 0)
-                        {
-                            foreach (var car in cars)
-                            {
-                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"id : {car.Id}, name: {car.Name}," +
-                        $" price : {car.Price}, amount: {car.Amount}, color : {car.Color}, carstore : {car.CarStore}");
-                            }
-                        }
-                        else
-                        {
-                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no owner found");
-                        }
-                    }
-                    else
-                    {
-                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no car store found with this id ");
-
-                    }
-                }
-                else
+                foreach (var seller in sellers)
                 {
-                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "enter id in correct format");
-                    goto ID;
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"id: {seller.Id}" +
+                           $"name : {seller.Name}, surname: {seller.Surname}, experience " +
+                           $": {seller.Experience}," +
+                           $" age: {seller.Age}, car store: {seller.CarStore}");
                 }
+
             }
             else
             {
-                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no car store found");
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no seller found");
             }
+
         }
         #endregion
     }
