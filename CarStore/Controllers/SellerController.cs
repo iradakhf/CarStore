@@ -315,28 +315,31 @@ namespace Manage.Controllers
                     if (carStore != null)
                     {
 
-                        var cars = _carRepository.GetAll();
-                        if (cars.Count > 0)
+                        var sellers = _sellerRepository.GetAll();
+                        if (sellers.Count > 0)
                         {
                         Id: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please choose the id");
-                            foreach (var car in cars)
+                            foreach (var seller in sellers)
                             {
-                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"id : {car.Id}, name: {car.Name}," +
-                        $" price : {car.Price}, amount: {car.Amount}, color : {car.Color}, carstore : {car.CarStore}");
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"id: {seller.Id}" +
+                                       $"name : {seller.Name}, surname: {seller.Surname}, experience " +
+                                       $": {seller.Experience}," +
+                                       $" age: {seller.Age}, car store: {seller.CarStore}");
+                                carStore.Sellers.Add(seller);
                             }
                             id = Console.ReadLine();
                             result = int.TryParse(id, out Id);
                             if (result)
                             {
-                                var car = _carRepository.Get(c => c.Id == Id);
-                                if (car != null)
+                                var seller = _sellerRepository.Get(s => s.Id == Id);
+                                if (seller != null)
                                 {
-                                    _carRepository.Delete(car);
-                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, "successfully deleted ");
+                                    _sellerRepository.Delete(seller);
+                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, "seller is successfully removed");
                                 }
                                 else
                                 {
-                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "nothing found with this id ");
+                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "nothing found with this ");
 
                                 }
 
